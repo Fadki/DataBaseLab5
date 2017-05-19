@@ -1,13 +1,12 @@
 package model;
 
-public class room {
+public class Room {
 
-	int id;
-	int floor;
-	int worker;
+	private int id;
+	private int floor;
+	private int worker;
 
-	public room(int id, int floor, int worker) {
-		super();
+	public Room(int id, int floor, int worker) {
 		this.id = id;
 		this.floor = floor;
 		this.worker = worker;

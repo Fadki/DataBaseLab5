@@ -2,9 +2,9 @@ package controller;
 
 import java.sql.Statement;
 
-public class update {
-	connecting con = new connecting();
-	Statement stmt;
+public class Update {
+	private Connecting con = new Connecting();
+	private Statement stmt;
 
 	public boolean update(String table, String column, int id, String value) {
 		try {
@@ -13,9 +13,6 @@ public class update {
 			stmt.executeUpdate(cmd);
 
 			stmt.close();
-
-			FindAll fa = new FindAll();
-			fa.get(table);
 
 			return true;
 

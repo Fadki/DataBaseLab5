@@ -1,19 +1,18 @@
 package model;
 
-public class photographer {
-	int id;
-	String name;
-	String fename;
-	String middle_name;
-	String date_birth;
+public class Photographer {
+	private int id;
+	private String name;
+	private String fename;
+	private String middleName;
+	private String dateBirth;
 
-	public photographer(int id, String name, String fename, String middle_name, String date_birth) {
-		super();
+	public Photographer(int id, String name, String fename, String middleName, String dateBirth) {
 		this.id = id;
 		this.name = name;
 		this.fename = fename;
-		this.middle_name = middle_name;
-		this.date_birth = date_birth;
+		this.middleName = middleName;
+		this.dateBirth = dateBirth;
 	}
 
 	public int getId() {
@@ -28,12 +27,12 @@ public class photographer {
 		return fename;
 	}
 
-	public String getMiddle_name() {
-		return middle_name;
+	public String getMiddleName() {
+		return middleName;
 	}
 
-	public String getDate_birth() {
-		return date_birth;
+	public String getDateBirth() {
+		return dateBirth;
 	}
 	
 	public String toString(){

@@ -1,21 +1,20 @@
 package model;
 
-public class worker {
+public class Worker {
 
-	int id;
-	String name;
-	String fename;
-	String middle_name;
-	String date_birth;
-	int function;
+	private int id;
+	private String name;
+	private String fename;
+	private String middleName;
+	private String dateBirth;
+	private int function;
 
-	public worker(int id, String name, String fename, String middle_name, String date_birth, int function) {
-		super();
+	public Worker(int id, String name, String fename, String middleName, String dateBirth, int function) {
 		this.id = id;
 		this.name = name;
 		this.fename = fename;
-		this.middle_name = middle_name;
-		this.date_birth = date_birth;
+		this.middleName = middleName;
+		this.dateBirth = dateBirth;
 		this.function = function;
 	}
 
@@ -31,16 +30,16 @@ public class worker {
 		return fename;
 	}
 
-	public String getMiddle_name() {
-		return middle_name;
+	public String getMiddleName() {
+		return middleName;
 	}
 
 	public int getFunction() {
 		return function;
 	}
 
-	public String getDate_birth() {
-		return date_birth;
+	public String getDateBirth() {
+		return dateBirth;
 	}
 	
 	public String toString(){

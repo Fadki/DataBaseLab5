@@ -2,23 +2,24 @@ package view.add;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import controller.FindAll;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
 
-public class addRoom extends JDialog {
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import controller.FindAll;
+import model.Room;
+import model.Worker;
+
+public class AddRoom extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField1;
@@ -26,20 +27,11 @@ public class addRoom extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			addRoom dialog = new addRoom();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public addRoom() {
+	public AddRoom() {
 		setBounds(100, 100, 381, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,15 +54,16 @@ public class addRoom extends JDialog {
 		contentPanel.add(lbl1);
 		
 		controller.FindAll fa = new FindAll();
-		fa.get("worker");
-		List<model.worker> listW = model.DB.listWorker;
+		List<Room> listRoom = fa.getRoom();
+		List<Worker> listW = fa.getWorker();
+		List<Worker> listWorkerAll = fa.getWorker();
 		List<Integer> listI = new ArrayList<Integer>();
-		for(model.room  w: model.DB.listRoom){
+		for(Room  w: listRoom){
 			listI.add(w.getWorker());
 		}
 		
 		for(int i : listI){
-			for(model.worker w : model.DB.listWorker)
+			for(Worker w : listWorkerAll)
 			if(w.getId() == i){
 				listW.remove(w);
 				break;
@@ -93,7 +86,7 @@ public class addRoom extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						controller.add add = new controller.add();
+						controller.Add add = new controller.Add();
 						add.addRoom(textField1.getText(), comboBox.getSelectedItem().toString());
 						dispose();
 					}

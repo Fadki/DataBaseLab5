@@ -2,10 +2,10 @@ package controller;
 
 import java.sql.Statement;
 
-public class add {
+public class Add {
 
-	connecting con = new connecting();
-	Statement stmt;
+	private Connecting con = new Connecting();
+	private Statement stmt;
 
 	private boolean add(String table, String cmdEnd) {
 		try {
@@ -15,14 +15,11 @@ public class add {
 
 			stmt.close();
 
-			FindAll fa = new FindAll();
-			fa.get(table);
-
 			return true;
 
 		} catch (Exception e) {
 	
-			//e.printStackTrace();
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -35,16 +32,16 @@ public class add {
 		return false;
 	}
 
-	public boolean addPhoto(String working_id, String date_photo, String name) {
-		String str = "nextval('photo_id_seq'), " + working_id + ", '" + date_photo + "', '" + name + "'";
+	public boolean addPhoto(String workingId, String datePhoto, String name) {
+		String str = "nextval('photo_id_seq'), " + workingId + ", '" + datePhoto + "', '" + name + "'";
 		if (add("photo", str)) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean addPhotographer(String name, String fename, String middle_name, String date_birth) {
-		String str = "nextval('photographer_id_seq'), '" + name + "', '" + fename + "', '" + middle_name + "', '" + date_birth + "'";
+	public boolean addPhotographer(String name, String fename, String middleName, String dateBirth) {
+		String str = "nextval('photographer_id_seq'), '" + name + "', '" + fename + "', '" + middleName + "', '" + dateBirth + "'";
 		if (add("photographer", str)) {
 			return true;
 		}
@@ -52,24 +49,27 @@ public class add {
 	}
 
 	public boolean addRoom(String floor, String worker) {
-		String str ="nextval('room_id_seq'), " + floor + ", " + worker;
+		FindFK ffk = new FindFK();
+		String str ="nextval('room_id_seq'), " + floor + ", " + ffk.getIdFromFK("worker", "fename", worker);
 		if (add("room", str)) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean addWorker(String name, String fename, String middle_name, String date_birth, String function) {
-		String str = "nextval('worker_id_seq'), '" + name + "', '" + fename + "', '" + middle_name + "', '" + date_birth + "', "
-				+ function;
+	public boolean addWorker(String name, String fename, String middleName, String dateBirth, String function) {
+		FindFK ffk = new FindFK();
+		String str = "nextval('worker_id_seq'), '" + name + "', '" + fename + "', '" + middleName + "', '" + dateBirth + "', "
+				+ffk.getIdFromFK("function", "function", function);
 		if (add("worker", str)) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean addWorking(String date_working, String subject, String photographer, String room) {
-		String str ="nextval('working_id_seq'), '" + date_working + "', '" + subject + "', " + photographer + ", " + room;
+	public boolean addWorking(String dateWorking, String subject, String photographer, String room) {
+		FindFK ffk = new FindFK();
+		String str ="nextval('working_id_seq'), '" + dateWorking + "', '" + subject + "', " +ffk.getIdFromFK("photographer", "name", photographer) + ", " + room;
 		if (add("working", str)) {
 			return true;
 		}

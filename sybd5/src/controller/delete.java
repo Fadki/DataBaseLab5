@@ -3,9 +3,9 @@ package controller;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class delete {
-	connecting con = new connecting();
-	Statement stmt;
+public class Delete {
+	private Connecting con = new Connecting();
+	private Statement stmt;
 
 	public boolean delete(String table, int id) {
 		try {
@@ -14,9 +14,6 @@ public class delete {
 			stmt.executeUpdate(cmd);
 
 			stmt.close();
-
-			FindAll fa = new FindAll();
-			fa.get(table);
 
 			return true;
 

@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class addPhotographer extends JDialog {
+public class AddPhotographer extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField1;
@@ -26,20 +26,11 @@ public class addPhotographer extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			addPhotographer dialog = new addPhotographer();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public addPhotographer() {
+	public AddPhotographer() {
 		setBounds(100, 100, 381, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,7 +82,7 @@ public class addPhotographer extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						controller.add add = new controller.add();
+						controller.Add add = new controller.Add();
 						add.addPhotographer(textField1.getText(), textField2.getText(), textField3.getText(), textField4.getText());
 						dispose();
 					}

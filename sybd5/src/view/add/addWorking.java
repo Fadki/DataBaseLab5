@@ -2,21 +2,23 @@ package view.add;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controller.FindAll;
+import model.Photographer;
+import model.Room;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-
-public class addWorking extends JDialog {
+public class AddWorking extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField1;
@@ -25,20 +27,11 @@ public class addWorking extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			addWorking dialog = new addWorking();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public addWorking() {
+	public AddWorking() {
 		setBounds(100, 100, 381, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,10 +63,10 @@ public class addWorking extends JDialog {
 		contentPanel.add(lbl1);
 		
 		controller.FindAll fa = new FindAll();
-		fa.get("photographer");
-		fa.get("room");
+		List<Photographer> listP = fa.getPhotographer();
+		List<Room> listR = fa.getRoom();
 		
-		JComboBox comboBox = new JComboBox(model.DB.listPhotographer.toArray());
+		JComboBox comboBox = new JComboBox(listP.toArray());
 		comboBox.setBounds(176, 102, 162, 20);
 		contentPanel.add(comboBox);
 		
@@ -81,7 +74,7 @@ public class addWorking extends JDialog {
 		label4.setBounds(25, 141, 106, 14);
 		contentPanel.add(label4);
 		
-		JComboBox comboBox_1 = new JComboBox(model.DB.listRoom.toArray());
+		JComboBox comboBox_1 = new JComboBox(listR.toArray());
 		comboBox_1.setBounds(176, 138, 162, 20);
 		contentPanel.add(comboBox_1);
 		
@@ -95,7 +88,7 @@ public class addWorking extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						controller.add add = new controller.add();
+						controller.Add add = new controller.Add();
 						add.addWorking(textField1.getText(), textField2.getText(), comboBox.getSelectedItem().toString(), comboBox_1.getSelectedItem().toString());
 						dispose();
 					}

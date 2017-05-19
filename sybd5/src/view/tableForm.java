@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,18 +18,23 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controller.Delete;
 import controller.FindAll;
 import controller.FindFK;
-import controller.delete;
-import model.DB;
-import view.add.addFunction;
-import view.add.addPhoto;
-import view.add.addPhotographer;
-import view.add.addRoom;
-import view.add.addWorker;
-import view.add.addWorking;
+import model.Function;
+import model.Photo;
+import model.Photographer;
+import model.Room;
+import model.Worker;
+import model.Working;
+import view.add.AddFunction;
+import view.add.AddPhoto;
+import view.add.AddPhotographer;
+import view.add.AddRoom;
+import view.add.AddWorker;
+import view.add.AddWorking;
 
-public class tableForm extends JDialog {
+public class TableForm extends JDialog {
 
 	private Timer timer = new Timer();
 	private final JPanel workPanel = new JPanel();
@@ -41,22 +47,13 @@ public class tableForm extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
 
-			tableForm dialog = new tableForm("floor");
-
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
 	 */
-	public tableForm(String nameTable) {
+	public TableForm(String nameTable) {
 		
 		setBounds(100, 100, 669, 396);
 		getContentPane().setLayout(null);
@@ -82,24 +79,24 @@ public class tableForm extends JDialog {
 
 				switch (nameTable) {
 				case "function":
-					addDialog = new addFunction();
+					addDialog = new AddFunction();
 					
 					break;
 				case "photo":
-					addDialog= new addPhoto();
+					addDialog= new AddPhoto();
 					
 					break;
 				case "photographer":
-					addDialog = new addPhotographer();
+					addDialog = new AddPhotographer();
 					break;
 				case "room":
-					addDialog = new addRoom();
+					addDialog = new AddRoom();
 					break;
 				case "worker":
-					addDialog = new addWorker();
+					addDialog = new AddWorker();
 					break;
 				case "working":
-					addDialog = new addWorking();
+					addDialog = new AddWorking();
 					break;
 				default:
 					break;
@@ -124,13 +121,13 @@ public class tableForm extends JDialog {
 		btnNewButton.setBounds(554, 25, 89, 23);
 		workPanel.add(btnNewButton);
 
-		JButton btnNewButton_1 = new JButton("change");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton1 = new JButton("change");
+		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int result = JOptionPane.showConfirmDialog(tableForm.this, "Do you want change this?", "message",
+				int result = JOptionPane.showConfirmDialog(TableForm.this, "Do you want change this?", "message",
 						JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
-					controller.update up = new controller.update();
+					controller.Update up = new controller.Update();
 					String nameColumn = Tmodel.getColumnName(table.getSelectedColumn());
 					int id = (int) Tmodel.getValueAt(table.getSelectedRow(), 0);
 
@@ -141,17 +138,17 @@ public class tableForm extends JDialog {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(554, 80, 89, 23);
-		workPanel.add(btnNewButton_1);
+		btnNewButton1.setBounds(554, 80, 89, 23);
+		workPanel.add(btnNewButton1);
 
-		JButton btnNewButton_2 = new JButton("delete");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnNewButton2 = new JButton("delete");
+		btnNewButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				int result = JOptionPane.showConfirmDialog(tableForm.this, "Do you want delete this?", "message",
+				int result = JOptionPane.showConfirmDialog(TableForm.this, "Do you want delete this?", "message",
 						JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
-					delete del = new delete();
+					Delete del = new Delete();
 					int id = (int) Tmodel.getValueAt(table.getSelectedRow(), 0);
 
 					del.delete(nameTable, id);
@@ -161,8 +158,8 @@ public class tableForm extends JDialog {
 				}
 			}
 		});
-		btnNewButton_2.setBounds(554, 139, 89, 23);
-		workPanel.add(btnNewButton_2);
+		btnNewButton2.setBounds(554, 139, 89, 23);
+		workPanel.add(btnNewButton2);
 
 		textField = new JTextField();
 		textField.setBounds(457, 81, 70, 20);
@@ -187,10 +184,10 @@ public class tableForm extends JDialog {
 		controller.FindFK ffk = new FindFK();
 		if (nameTable.equals("function")) {
 			setTitle("function");
-			fa.get("function");
+			List<Function> list = fa.getFunction();
 			Tmodel.setColumnIdentifiers(new String[] { "id", "function", "pay" });
 
-			for (model.function f : DB.listFunction) {
+			for (model.Function f : list) {
 				Object[] o = new Object[3];
 				o[0] = f.getId();
 				o[1] = f.getFunction();
@@ -200,39 +197,39 @@ public class tableForm extends JDialog {
 
 		} else if (nameTable.equals("photo")) {
 			setTitle("photo");
-			fa.get("photo");
+			List<Photo> list = fa.getPhoto();
 			Tmodel.setColumnIdentifiers(new String[] { "id", "working_id", "date_photo", "name" });
 
-			for (model.photo f : DB.listPhoto) {
+			for (model.Photo f : list) {
 				Object[] o = new Object[4];
 				o[0] = f.getId();
-				o[1] = f.getWorking_id();
-				o[2] = f.getDate_photo();
+				o[1] = f.getWorkingId();
+				o[2] = f.getDatePhoto();
 				o[3] = f.getName();
 				Tmodel.addRow(o);
 			}
 
 		} else if (nameTable.equals("photographer")) {
 			setTitle("photographer");
-			fa.get("photographer");
+			List<Photographer> list = fa.getPhotographer();
 			Tmodel.setColumnIdentifiers(new String[] { "id", "name", "fename", "middle_name", "date_birth" });
 
-			for (model.photographer f : DB.listPhotographer) {
+			for (model.Photographer f : list) {
 				Object[] o = new Object[5];
 				o[0] = f.getId();
 				o[1] = f.getName();
 				o[2] = f.getFename();
-				o[3] = f.getMiddle_name();
-				o[4] = f.getDate_birth();
+				o[3] = f.getMiddleName();
+				o[4] = f.getDateBirth();
 				Tmodel.addRow(o);
 			}
 
 		} else if (nameTable.equals("room")) {
 			setTitle("room");
-			fa.get("room");
+			List<Room> list = fa.getRoom();
 			Tmodel.setColumnIdentifiers(new String[] { "id", "floor", "worker" });
 
-			for (model.room f : DB.listRoom) {
+			for (model.Room f : list) {
 				Object[] o = new Object[3];
 				o[0] = f.getId();
 				o[1] = f.getFloor();
@@ -243,17 +240,17 @@ public class tableForm extends JDialog {
 
 		} else if (nameTable.equals("worker")) {
 			setTitle("worker");
-			fa.get("worker");
+			List<Worker> list = fa.getWorker();
 			Tmodel.setColumnIdentifiers(
 					new String[] { "id", "name", "fename", "middle_name", "date_birth", "function" });
 
-			for (model.worker f : DB.listWorker) {
+			for (model.Worker f : list) {
 				Object[] o = new Object[6];
 				o[0] = f.getId();
 				o[1] = f.getName();
 				o[2] = f.getFename();
-				o[3] = f.getMiddle_name();
-				o[4] = f.getDate_birth();
+				o[3] = f.getMiddleName();
+				o[4] = f.getDateBirth();
 				o[5] = ffk.getFK("function", "function", f.getFunction());
 				//o[5] = f.getFunction();
 				Tmodel.addRow(o);
@@ -261,13 +258,13 @@ public class tableForm extends JDialog {
 
 		} else if (nameTable.equals("working")) {
 			setTitle("working");
-			fa.get("working");
+			List<Working> list = fa.getWorking();
 			Tmodel.setColumnIdentifiers(new String[] { "id", "date_working", "subject", "photographer", "room" });
 
-			for (model.working f : DB.listWorking) {
+			for (model.Working f : list) {
 				Object[] o = new Object[5];
 				o[0] = f.getId();
-				o[1] = f.getDate_working();
+				o[1] = f.getDateWorking();
 				o[2] = f.getSubject();
 				o[3] = ffk.getFK("photographer", "name", f.getPhotographer());
 				//o[3] = f.getPhotographer();

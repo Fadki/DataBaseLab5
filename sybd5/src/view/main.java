@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import controller.connecting;
+import controller.Connecting;
 import javax.swing.SwingConstants;;
 
 public class main {
@@ -51,7 +51,7 @@ public class main {
 	 */
 	private void initialize() {
 
-		connecting connectingClass = new connecting();
+		Connecting connectingClass = new Connecting();
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 396);
@@ -67,9 +67,9 @@ public class main {
 		JPanel login_ = new JPanel();
 		login_.setLayout(null);
 
-		JLabel Label_host = new JLabel("Host");
-		Label_host.setBounds(43, 29, 103, 14);
-		login_.add(Label_host);
+		JLabel LabelHost = new JLabel("Host");
+		LabelHost.setBounds(43, 29, 103, 14);
+		login_.add(LabelHost);
 
 		JLabel lblPort = new JLabel("Port");
 		lblPort.setBounds(43, 57, 103, 14);
@@ -87,69 +87,69 @@ public class main {
 		lblPassword.setBounds(43, 141, 103, 14);
 		login_.add(lblPassword);
 
-		JTextField textField_host = new JTextField();
-		textField_host.setText("localhost");
-		textField_host.setBounds(156, 23, 163, 20);
-		login_.add(textField_host);
-		textField_host.setColumns(10);
+		JTextField textFieldHost = new JTextField();
+		textFieldHost.setText("localhost");
+		textFieldHost.setBounds(156, 23, 163, 20);
+		login_.add(textFieldHost);
+		textFieldHost.setColumns(10);
 
-		JTextField textField_port = new JTextField();
-		textField_port.setText("5432");
-		textField_port.setColumns(10);
-		textField_port.setBounds(156, 51, 163, 20);
-		login_.add(textField_port);
+		JTextField textFieldPort = new JTextField();
+		textFieldPort.setText("5432");
+		textFieldPort.setColumns(10);
+		textFieldPort.setBounds(156, 51, 163, 20);
+		login_.add(textFieldPort);
 
-		JTextField textField_dbName = new JTextField();
-		textField_dbName.setText("photo");
-		textField_dbName.setColumns(10);
-		textField_dbName.setBounds(156, 79, 163, 20);
-		login_.add(textField_dbName);
+		JTextField textFieldDbName = new JTextField();
+		textFieldDbName.setText("photo");
+		textFieldDbName.setColumns(10);
+		textFieldDbName.setBounds(156, 79, 163, 20);
+		login_.add(textFieldDbName);
 
-		JTextField textField_user = new JTextField();
-		textField_user.setText("postgres");
-		textField_user.setColumns(10);
-		textField_user.setBounds(156, 107, 163, 20);
-		login_.add(textField_user);
+		JTextField textFieldUser = new JTextField();
+		textFieldUser.setText("postgres");
+		textFieldUser.setColumns(10);
+		textFieldUser.setBounds(156, 107, 163, 20);
+		login_.add(textFieldUser);
 
-		JTextField textField_password = new JTextField();
-		textField_password.setText("1");
-		textField_password.setColumns(10);
-		textField_password.setBounds(156, 135, 163, 20);
-		login_.add(textField_password);
+		JTextField textFieldPassword = new JTextField();
+		textFieldPassword.setText("1");
+		textFieldPassword.setColumns(10);
+		textFieldPassword.setBounds(156, 135, 163, 20);
+		login_.add(textFieldPassword);
 
-		JLabel label_status = new JLabel("Disconnect");
-		label_status.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_status.setBounds(240, 11, 184, 14);
-		label_status.setForeground(Color.RED);
-		menuPanel.add(label_status);
+		JLabel labelStatus = new JLabel("Disconnect");
+		labelStatus.setHorizontalAlignment(SwingConstants.RIGHT);
+		labelStatus.setBounds(240, 11, 184, 14);
+		labelStatus.setForeground(Color.RED);
+		menuPanel.add(labelStatus);
 
 		JMenuBar menuBarTable = new JMenuBar();
 
-		JButton btn_log = new JButton("login");
-		btn_log.addActionListener(new ActionListener() {
+		JButton btnLog = new JButton("login");
+		btnLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				label_status.setForeground(Color.YELLOW);
-				label_status.setText("Connecting...");
-				if (connectingClass.connect(textField_host.getText(), textField_port.getText(),
-						textField_dbName.getText(), textField_user.getText(), textField_password.getText())) {
-					label_status.setForeground(Color.GREEN);
-					label_status.setText("Connected");
+				labelStatus.setForeground(Color.YELLOW);
+				labelStatus.setText("Connecting...");
+				if (connectingClass.connect(textFieldHost.getText(), textFieldPort.getText(),
+						textFieldDbName.getText(), textFieldUser.getText(), textFieldPassword.getText())) {
+					labelStatus.setForeground(Color.GREEN);
+					labelStatus.setText("Connected");
 					frame.getContentPane().remove(login_);
 					frame.getContentPane().add(loginPanel);
 					menuPanel.add(menuBarTable);
 
 					frame.repaint();
 				} else {
-					label_status.setForeground(Color.RED);
-					label_status.setText("Connecting problem");
+					labelStatus.setForeground(Color.RED);
+					labelStatus.setText("Connecting problem");
 					// JOptionPane.showMessageDialog(frame, "Error");
 				}
 
 			}
 		});
-		btn_log.setBounds(230, 166, 89, 23);
-		login_.add(btn_log);
+		btnLog.setBounds(230, 166, 89, 23);
+		login_.add(btnLog);
 
 		login_.setBounds(0, 29, 434, 328);
 
@@ -166,8 +166,8 @@ public class main {
 
 		// frame.getContentPane().add(login_);
 
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Connect");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+		JMenuItem mntmNewMenuItem2 = new JMenuItem("Connect");
+		mntmNewMenuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.getContentPane().remove(loginPanel);
 				frame.getContentPane().add(login_);
@@ -176,14 +176,14 @@ public class main {
 
 			}
 		});
-		mnNewMenu.add(mntmNewMenuItem_2);
+		mnNewMenu.add(mntmNewMenuItem2);
 
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Disconnect");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+		JMenuItem mntmNewMenuItem1 = new JMenuItem("Disconnect");
+		mntmNewMenuItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				label_status.setForeground(Color.RED);
-				label_status.setText("Disconnect");
+				labelStatus.setForeground(Color.RED);
+				labelStatus.setText("Disconnect");
 				connectingClass.disconnect();
 				frame.getContentPane().remove(login_);
 				frame.getContentPane().add(loginPanel);
@@ -192,7 +192,7 @@ public class main {
 				frame.repaint();
 			}
 		});
-		mnNewMenu.add(mntmNewMenuItem_1);
+		mnNewMenu.add(mntmNewMenuItem1);
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("Exit");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
@@ -205,62 +205,62 @@ public class main {
 
 		menuBarTable.setBounds(68, 0, 58, 30);
 
-		JMenu mnNewMenu_1 = new JMenu(" Tables ");
-		menuBarTable.add(mnNewMenu_1);
+		JMenu mnNewMenu1 = new JMenu(" Tables ");
+		menuBarTable.add(mnNewMenu1);
 
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Room");
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+		JMenuItem mntmNewMenuItem4 = new JMenuItem("Room");
+		mntmNewMenuItem4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tableForm tf = new tableForm("room");
+				TableForm tf = new TableForm("room");
 				tf.show();
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_4);
+		mnNewMenu1.add(mntmNewMenuItem4);
 
 		JMenuItem mntmWorker = new JMenuItem("Worker");
 		mntmWorker.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tableForm tf = new tableForm("worker");
+				TableForm tf = new TableForm("worker");
 				tf.show();
 			}
 		});
-		mnNewMenu_1.add(mntmWorker);
+		mnNewMenu1.add(mntmWorker);
 
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Function");
-		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+		JMenuItem mntmNewMenuItem5 = new JMenuItem("Function");
+		mntmNewMenuItem5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tableForm tf = new tableForm("function");
+				TableForm tf = new TableForm("function");
 				tf.show();
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_5);
+		mnNewMenu1.add(mntmNewMenuItem5);
 
 		JMenuItem mntmWorking = new JMenuItem("Working");
 		mntmWorking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tableForm tf = new tableForm("working");
+				TableForm tf = new TableForm("working");
 				tf.show();
 			}
 		});
-		mnNewMenu_1.add(mntmWorking);
+		mnNewMenu1.add(mntmWorking);
 
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Photographer");
-		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+		JMenuItem mntmNewMenuItem6 = new JMenuItem("Photographer");
+		mntmNewMenuItem6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tableForm tf = new tableForm("photographer");
+				TableForm tf = new TableForm("photographer");
 				tf.show();
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_6);
+		mnNewMenu1.add(mntmNewMenuItem6);
 
 		JMenuItem mntmPhotography = new JMenuItem("Photo");
 		mntmPhotography.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tableForm tf = new tableForm("photo");
+				TableForm tf = new TableForm("photo");
 				tf.show();
 			}
 		});
-		mnNewMenu_1.add(mntmPhotography);
+		mnNewMenu1.add(mntmPhotography);
 
 	}
 

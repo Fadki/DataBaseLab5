@@ -2,13 +2,20 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
+import model.Function;
+import model.Photo;
+import model.Photographer;
+import model.Room;
+import model.Worker;
+import model.Working;
+
 public class FindAll {
-	connecting con = new connecting();
-	ResultSet rs;
-	Statement stmt;
-	model.DB db = new model.DB();
+	private Connecting con = new Connecting();
+	private ResultSet rs;
+	private Statement stmt;
 
 	private boolean getTables(String command) {
 		try {
@@ -25,109 +32,104 @@ public class FindAll {
 		}
 	}
 
-	private void getFunction() {
+	public List<Function> getFunction() {
 		if (getTables("SELECT * FROM function;")) {
-			model.DB.listFunction.clear();
+			List<Function> list = new ArrayList<Function>();
 			try {
 				while (rs.next()) {
-					db.listFunction.add(new model.function(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+					list.add(new model.Function(rs.getInt(1), rs.getString(2), rs.getInt(3)));
 				}
+				return list;
 			} catch (Exception e) {
 				e.printStackTrace();
+				return null;
 			}
 		}
+		return null;
 	}
 
-	private void getPhoto() {
+	public List<Photo> getPhoto() {
 		if (getTables("SELECT * FROM photo;")) {
-			model.DB.listPhoto.clear();
+			List<Photo> list = new ArrayList<Photo>();
 			try {
 				while (rs.next()) {
-					db.listPhoto.add(new model.photo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
+					list.add(new model.Photo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
 				}
+				return list;
 			} catch (Exception e) {
 				e.printStackTrace();
+				return null;
 			}
 		}
+		return null;
 	}
 
-	private void getPhotographer() {
+	public List<Photographer> getPhotographer() {
 		if (getTables("SELECT * FROM photographer;")) {
-			model.DB.listPhotographer.clear();
+			List<Photographer> list = new ArrayList<Photographer>();
 			try {
 				while (rs.next()) {
-					db.listPhotographer.add(new model.photographer(rs.getInt(1), rs.getString(2), rs.getString(3),
+					list.add(new model.Photographer(rs.getInt(1), rs.getString(2), rs.getString(3),
 							rs.getString(4), rs.getString(5)));
 				}
+				return list;
 			} catch (Exception e) {
 				e.printStackTrace();
+				return null;
 			}
 		}
+		return null;
 	}
 
-	private void getRoom() {
+	public List<Room> getRoom() {
 		if (getTables("SELECT * FROM room;")) {
-			model.DB.listRoom.clear();
+			List<Room> list = new ArrayList<Room>();
 			try {
 				while (rs.next()) {
-					db.listRoom.add(new model.room(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
+					list.add(new model.Room(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
 				}
+				return list;
 			} catch (Exception e) {
 				e.printStackTrace();
+				return null;
 			}
 		}
+		return null;
 	}
 
-	private void getWorker() {
+	public List<Worker> getWorker() {
 		if (getTables("SELECT * FROM worker;")) {
-			model.DB.listWorker.clear();
+			List<Worker> list = new ArrayList<Worker>();
 			try {
 				while (rs.next()) {
-					db.listWorker.add(new model.worker(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					list.add(new model.Worker(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
 							rs.getString(5), rs.getInt(6)));
 				}
+				return list;
 			} catch (Exception e) {
 				e.printStackTrace();
+				return null;
 			}
 		}
+		return null;
 	}
 
-	private void getWorking() {
+	public List<Working> getWorking() {
 		if (getTables("SELECT * FROM working;")) {
-			model.DB.listWorking.clear();
+			List<Working> list = new ArrayList<Working>();
 			try {
 				while (rs.next()) {
-					db.listWorking.add(new model.working(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4),
+					list.add(new model.Working(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4),
 							rs.getInt(5)));
 				}
+				return list;
 			} catch (Exception e) {
 				e.printStackTrace();
+				return null;
 			}
 		}
+		return null;
 	}
 
-	public void get(String table) {
-		switch (table) {
-		case "function":
-			getFunction();
-			break;
-		case "photo":
-			getPhoto();
-			break;
-		case "photographer":
-			getPhotographer();
-			break;
-		case "room":
-			getRoom();
-			break;
-		case "worker":
-			getWorker();
-			break;
-		case "working":
-			getWorking();
-			break;
-		default:
-			break;
-		}
-	}
+
 }

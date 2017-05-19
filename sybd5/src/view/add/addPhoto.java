@@ -2,21 +2,22 @@ package view.add;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controller.FindAll;
+import model.Working;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-
-public class addPhoto extends JDialog {
+public class AddPhoto extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField1;
@@ -25,20 +26,11 @@ public class addPhoto extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			addPhoto dialog = new addPhoto();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public addPhoto() {
+	public AddPhoto() {
 		setBounds(100, 100, 381, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,10 +62,10 @@ public class addPhoto extends JDialog {
 		contentPanel.add(lbl1);
 		
 		controller.FindAll fa = new FindAll();
-		fa.get("working");
+		List<Working> listWorking = fa.getWorking();
 		
 		
-		JComboBox comboBox = new JComboBox(model.DB.listWorking.toArray());
+		JComboBox comboBox = new JComboBox(listWorking.toArray());
 		comboBox.setBounds(176, 24, 162, 20);
 		contentPanel.add(comboBox);
 		
@@ -87,7 +79,7 @@ public class addPhoto extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						controller.add add = new controller.add();
+						controller.Add add = new controller.Add();
 						add.addPhoto(comboBox.getSelectedItem().toString() ,textField1.getText(), textField2.getText());
 						dispose();
 					}

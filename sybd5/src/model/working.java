@@ -1,17 +1,16 @@
 package model;
 
-public class working {
+public class Working {
 
-	int id;
-	String date_working;
-	String subject;
-	int photographer;
-	int room;
+	private int id;
+	private String dateWorking;
+	private String subject;
+	private int photographer;
+	private int room;
 
-	public working(int id, String date_working, String subject, int photographer, int room) {
-		super();
+	public Working(int id, String dateWorking, String subject, int photographer, int room) {
 		this.id = id;
-		this.date_working = date_working;
+		this.dateWorking = dateWorking;
 		this.subject = subject;
 		this.photographer = photographer;
 		this.room = room;
@@ -21,8 +20,8 @@ public class working {
 		return id;
 	}
 
-	public String getDate_working() {
-		return date_working;
+	public String getDateWorking() {
+		return dateWorking;
 	}
 
 	public String getSubject() {

@@ -1,13 +1,12 @@
 package model;
 
-public class function {
+public class Function {
 
-	int id;
-	String function;
-	int pay;
+	private int id;
+	private String function;
+	private int pay;
 
-	public function(int id, String function, int pay) {
-		super();
+	public Function(int id, String function, int pay) {
 		this.id = id;
 		this.function = function;
 		this.pay = pay;

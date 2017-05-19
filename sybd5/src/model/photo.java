@@ -1,17 +1,16 @@
 package model;
 
-public class photo {
+public class Photo {
 
-	int id;
-	int working_id;
-	String date_photo;
-	String name;
+	private int id;
+	private int workingId;
+	private String datePhoto;
+	private String name;
 
-	public photo(int id, int working_id, String date_photo, String name) {
-		super();
+	public Photo(int id, int workingId, String datePhoto, String name) {
 		this.id = id;
-		this.working_id = working_id;
-		this.date_photo = date_photo;
+		this.workingId = workingId;
+		this.datePhoto = datePhoto;
 		this.name = name;
 	}
 
@@ -19,12 +18,12 @@ public class photo {
 		return id;
 	}
 
-	public int getWorking_id() {
-		return working_id;
+	public int getWorkingId() {
+		return workingId;
 	}
 
-	public String getDate_photo() {
-		return date_photo;
+	public String getDatePhoto() {
+		return datePhoto;
 	}
 
 	public String getName() {
